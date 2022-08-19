@@ -8,3 +8,11 @@ export interface IUser extends ILogin {
   username: string;
   role: string;
 }
+
+export interface ITokenPayload {
+  id: number;
+  username: string;
+  role: string;
+  email: string;
+  // omit quando chamar a classe
+}
