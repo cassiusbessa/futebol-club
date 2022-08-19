@@ -10,7 +10,7 @@ const userRepository = new UserRepository();
 const userServiceValidation = new UserServiceValidation();
 const jwtService = new Jwt();
 const userService = new UserService(userRepository, userServiceValidation, jwtService);
-const controller = new UserController('bugadooooo');
+const controller = new UserController(userService);
 console.log('log de service e controller', userService, controller);
 
 usersRouter.post('/login', controller.loginController.bind(controller));
