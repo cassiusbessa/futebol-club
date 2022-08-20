@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
+// import { ITokenPayload } from '../database/models/entitites/IUser';
 // import { ITokenHeader } from './ITokenHeader';
+
 import { ErrorHandler } from '../utils';
 import User from '../database/models/users';
 import { IUserService } from '../services/IPersistenceService';
@@ -22,15 +24,9 @@ export default class UserController {
     }
   };
 
-  validateToken = async (req: Request, res: Response) => {
-    const { authorization } = req.headers;
-    try {
-      const role = await this._persistanceService.validateToken(authorization as string);
-      return res.status(200).json({ role });
-    } catch (e) {
-      const error = e as ErrorHandler;
-      console.log('error', error);
-      return res.status(error.statusCode).json({ message: error.message });
-    }
+  getRole = async (req: Request, res: Response) => {
+    const { user } = req.body;
+    const role = await this._persistanceService.getRole(user);
+    return res.status(200).json({ role });
   };
 }

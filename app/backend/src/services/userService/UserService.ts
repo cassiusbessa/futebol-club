@@ -31,8 +31,5 @@ export default class UserService implements IUserService<IUser> {
     return token;
   }
 
-  public async validateToken(token: string): Promise<string> {
-    const user = this._tokenService.verify(token);
-    return user.role;
-  }
+  public getRole = async (user: ITokenPayload): Promise<string> => user.role;
 }

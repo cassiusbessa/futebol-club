@@ -7,5 +7,5 @@ export interface IPersistanceService<T> {
 }
 
 export interface IUserService<T> extends IPersistanceService<T> {
-  validateToken(token: string): Promise<string>;
+  getRole(user: T): Promise<string>;
 }
