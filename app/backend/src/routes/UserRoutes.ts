@@ -1,19 +1,12 @@
 import { Router } from 'express';
 import UserController from '../controllers/UserController';
-import UserRepository from '../database/models/repository/UserRepository';
-import UserService from '../services/userService/UserService';
-import UserServiceValidation from '../services/userService/UserServiceValidation';
-import Jwt from '../utils/jwt';
+import UserServiceFactory from '../services/userService';
 
-const usersRouter = Router();
-const userRepository = new UserRepository();
-const userServiceValidation = new UserServiceValidation();
-const jwtService = new Jwt();
-const userService = new UserService(userRepository, userServiceValidation, jwtService);
+const loginRouter = Router();
+const userService = UserServiceFactory.create();
 const controller = new UserController(userService);
-console.log('log de service e controller', userService, controller);
 
-usersRouter.post('/login', controller.loginController.bind(controller));
-// usersRouter.post('/login', (req, res) => res.status(200).json({ message: 'login' }));
+loginRouter.post('/', controller.login);
+loginRouter.get('/validate', controller.validateToken);
 
-export default usersRouter;
+export default loginRouter;

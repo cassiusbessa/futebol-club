@@ -1,20 +1,19 @@
 import { ILogin } from '../../database/models/entitites/IUser';
 import Users from '../../database/models/users';
-import encryptPassword from '../../utils/encryptPassword';
+import { encryptPassword, ErrorHandler, httpStatusCodes } from '../../utils';
 
 export default class UserServiceValidation {
-  public async loginValidation(login: ILogin, user: Users | null): Promise<Users> {
-    console.log('UserServiceValidation-loginvalidation', this);
+  public loginValidation = async (login: ILogin, user: Users | null): Promise<Users> => {
     if (!login.email || !login.password) {
-      throw new Error('Email and password are required');
+      throw new ErrorHandler('All fields must be filled', httpStatusCodes.badRequest);
     }
     if (!user) {
-      throw new Error('User not found');
+      throw new ErrorHandler('Incorrect email or password', httpStatusCodes.unauthorized);
     }
     const isPasswordValid = await encryptPassword.comparePassword(login.password, user.password);
     if (!isPasswordValid) {
-      throw new Error('Password is not valid');
+      throw new ErrorHandler('Incorrect email or password', httpStatusCodes.unauthorized);
     }
     return user;
-  }
+  };
 }

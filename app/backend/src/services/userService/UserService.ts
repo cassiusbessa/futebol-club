@@ -1,10 +1,10 @@
 import IToken from '../../utils/IToken';
-import { IPersistanceService } from '../IPersistenceService';
+import { IUserService } from '../IPersistenceService';
 import UserRepository from '../../database/models/repository/UserRepository';
 import UserServiceValidation from './UserServiceValidation';
 import { ILogin, ITokenPayload, IUser } from '../../database/models/entitites/IUser';
 
-export default class UserService implements IPersistanceService<IUser> {
+export default class UserService implements IUserService<IUser> {
   private _userRepository: UserRepository;
   private _userValidation: UserServiceValidation;
   private _tokenService: IToken;
@@ -20,7 +20,6 @@ export default class UserService implements IPersistanceService<IUser> {
   }
 
   public async login(login: ILogin): Promise<string> {
-    console.log('service login');
     const user = await this._userRepository.getByEmail(login.email);
     const payLoad = await this._userValidation.loginValidation(login, user);
     const tokenPayLoad: ITokenPayload = { id: payLoad.id,
@@ -30,5 +29,10 @@ export default class UserService implements IPersistanceService<IUser> {
     };
     const token = this._tokenService.generate(tokenPayLoad);
     return token;
+  }
+
+  public async validateToken(token: string): Promise<string> {
+    const user = this._tokenService.verify(token);
+    return user.role;
   }
 }

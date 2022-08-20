@@ -1,4 +1,4 @@
-import { sign, SignOptions } from 'jsonwebtoken';
+import { sign, SignOptions, verify } from 'jsonwebtoken';
 import { ITokenPayload } from '../database/models/entitites/IUser';
 import IToken from './IToken';
 
@@ -16,6 +16,12 @@ class Jwt implements IToken {
 
   public generate(payload: ITokenPayload) {
     return sign(payload, SECRET, this._jwtConfig);
+  }
+
+  public verify(token: string) {
+    console.log(this);
+    const user = verify(token, SECRET);
+    return user as ITokenPayload;
   }
 }
 

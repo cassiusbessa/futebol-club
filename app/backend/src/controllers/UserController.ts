@@ -1,50 +1,36 @@
 import { Request, Response } from 'express';
-// import { ILogin } from '../database/models/entitites/IUser';
+// import { ITokenHeader } from './ITokenHeader';
+import { ErrorHandler } from '../utils';
 import User from '../database/models/users';
-import { IPersistanceService } from '../services/IPersistenceService';
-
-// export default class UserController {
-//   // _persistanceService: IPersistanceService<User>;
-//   teste: string;
-
-//   constructor(teste: string) {
-//     this.teste = teste;
-//   }
-
-//   public loginController(req: Request, res: Response) {
-//     // console.log('this controller', this);
-//     // console.log('controller login');
-//     // console.log(req.body);
-//     // try {
-//     // console.log('controller try login');
-//     // const token = await this._persistanceService.login(req.body);
-//     // console.log('token', token);
-//     return res.status(200).json({ message: this.teste });
-//     // } catch (error) {
-//     //   return res.status(400).json({ message: error });
-//     // }
-//   }
-// }
+import { IUserService } from '../services/IPersistenceService';
 
 export default class UserController {
-  _persistanceService: IPersistanceService<User>;
+  _persistanceService: IUserService<User>;
 
-  constructor(persistanceService: IPersistanceService<User>) {
+  constructor(persistanceService: IUserService<User>) {
     this._persistanceService = persistanceService;
   }
 
-  public async loginController(req: Request, res: Response) {
-    console.log('this controller', this);
-    console.log('controller login');
-    console.log(req.body);
+  login = async (req: Request, res: Response) => {
     try {
-      console.log('controller try login');
       const token = await this._persistanceService.login(req.body);
       console.log('token', token);
       return res.status(200).json({ token });
-    } catch (error: any) {
-      console.log(error);
-      return res.status(400).json({ message: error.message });
+    } catch (e) {
+      const error = e as ErrorHandler;
+      return res.status(error.statusCode).json({ message: error.message });
     }
-  }
+  };
+
+  validateToken = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    try {
+      const role = await this._persistanceService.validateToken(authorization as string);
+      return res.status(200).json({ role });
+    } catch (e) {
+      const error = e as ErrorHandler;
+      console.log('error', error);
+      return res.status(error.statusCode).json({ message: error.message });
+    }
+  };
 }
