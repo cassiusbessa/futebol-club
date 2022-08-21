@@ -18,11 +18,10 @@ class Jwt implements IToken {
     return sign(payload, SECRET, this._jwtConfig);
   }
 
-  public verify(token: string) {
-    console.log(this);
+  public verify = (token: string) => {
     const user = verify(token, SECRET);
     return user as ITokenPayload;
-  }
+  };
 }
 
 export default Jwt;
