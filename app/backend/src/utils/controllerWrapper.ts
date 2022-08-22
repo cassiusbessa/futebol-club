@@ -4,7 +4,7 @@ export default (callBack: any) => async (req: Request, res: Response, next: Next
   try {
     await callBack(req, res, next);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     next(e);
   }
 };

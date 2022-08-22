@@ -1,6 +1,6 @@
 import { ITokenPayload } from '../database/models/entitites/IUser';
 
-export default interface IToken {
+export default interface ITokenService {
   generate(tokenPayload: ITokenPayload): string;
-  verify(token: string): ITokenPayload;
+  verifyToken(token: string): ITokenPayload;
 }

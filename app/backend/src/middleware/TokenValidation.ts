@@ -1,12 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import { ITokenPayload } from '../database/models/entitites/IUser';
-import { IToken, httpStatusCodes, ErrorHandler } from '../utils';
+import ITokenService from '../interfaces/ITokenService';
+import { httpStatusCodes, ErrorHandler } from '../utils';
 
 export default class TokenValidation {
-  private _tokenService: IToken;
-  constructor(tokenService: IToken) {
-    this._tokenService = tokenService;
-  }
+  constructor(private _tokenService: ITokenService) {}
 
   public validateToken = async (req: Request, res: Response, next: NextFunction) => {
     const { authorization } = req.headers;
@@ -14,10 +12,12 @@ export default class TokenValidation {
       return res.status(httpStatusCodes.unauthorized).json({ message: 'No token provided' });
     }
     try {
-      const user = this._tokenService.verify(authorization);
+      const user = this._tokenService.verifyToken(authorization);
+      console.log('user', user);
       req.body.user = user as ITokenPayload;
       next();
     } catch (e) {
+      console.log(e);
       const error = new ErrorHandler('Invalid or Expired token', httpStatusCodes.unauthorized);
       return res.status(error.statusCode).json({ message: error.message });
     }

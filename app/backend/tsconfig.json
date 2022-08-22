@@ -7,7 +7,8 @@
     "rootDir": "./src",
     "strict": true,
     "moduleResolution": "node",
-    "baseUrl": ".", 
+    "baseUrl": ".",
+    // "esModuleInterop": true, // for typescript 
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,

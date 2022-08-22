@@ -1,17 +1,10 @@
 import { Request, Response } from 'express';
-// import { ITokenPayload } from '../database/models/entitites/IUser';
-// import { ITokenHeader } from './ITokenHeader';
-
 import { controllerWrapper } from '../utils';
 import User from '../database/models/users';
 import { IUserService } from '../services/IPersistenceService';
 
 export default class UserController {
-  _persistanceService: IUserService<User>;
-
-  constructor(persistanceService: IUserService<User>) {
-    this._persistanceService = persistanceService;
-  }
+  constructor(private _persistanceService: IUserService<User>) {}
 
   login = controllerWrapper(async (req: Request, res: Response) => {
     const token = await this._persistanceService.login(req.body);
