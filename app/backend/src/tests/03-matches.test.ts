@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import { app } from '../app';
 import { httpStatusCodes } from '../utils'
-import  IMatches  from '../database/models/entitites/IMatches';
+import  {IShowMatches}  from '../database/models/entitites/IMatches';
 import matchesMock from './mocks/matchesMock';
 import {MatcheRepository} from '../database/models/repository/';
 
@@ -17,7 +17,7 @@ const { expect } = chai;
 describe('02- /Matches', () => {  
   describe('If is successful', () => {
     beforeEach(() => {
-      sinon.stub(MatcheRepository.prototype, "getAll").resolves(matchesMock as IMatches[]);
+      sinon.stub(MatcheRepository.prototype, "getAll").resolves(matchesMock as IShowMatches[]);
     });
     afterEach(() => {
       sinon.restore();
