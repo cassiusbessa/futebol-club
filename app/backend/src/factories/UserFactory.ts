@@ -1,7 +1,7 @@
 import { UserController } from '../controllers';
-import UserService from '../services/userService/UserService';
+import { UserService } from '../services';
 import UserServiceValidation from '../services/userService/UserServiceValidation';
-import UserRepository from '../database/models/repository/UserRepository';
+import { UserRepository } from '../database/models/repository';
 import Jwt from '../utils/jwt';
 
 export default class UserFactory {

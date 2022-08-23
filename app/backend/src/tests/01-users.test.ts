@@ -2,8 +2,8 @@ import * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
-import { app } from '../../src/app';
-import { Jwt, httpStatusCodes, encryptPassword } from '../utils/'
+import { app } from '../app';
+import { Jwt, httpStatusCodes, encryptPassword } from '../utils'
 import Users from '../database/models/users';
 import { incompletedLoginMock, wrongFieldsLoginMock, correctLoginMock, tokenPayload, userMock } from './mocks/userMocks';
 import UserRepository from '../database/models/repository/UserRepository';
@@ -30,7 +30,7 @@ class SequelizeErrorMock extends Error {
 //   phone: 'any-phone'
 // }
 
-describe('Login', () => {
+describe('01- /Login', () => {
   describe('If the password or email has not been provided at login', () => {
     it('should return status 400', async () => {
       const response = await chai.request(app)
@@ -93,16 +93,11 @@ describe('Login', () => {
   });
 });
 
-describe('Login Validate', () => {
+describe('/Login/Validate', () => {
   describe('If the token is invalid', () => {
-    // beforeEach(() => {
-    //   sinon.stub(Jwt.prototype, "verify").resolves('Invalid token');
-    // });
-
     afterEach(sinon.restore);
 
     it('return status 401', async () => {
-      const defaultToken = jwtTest.generate(tokenPayload)
       const response = await chai.request(app)
         .get('/login/validate').set('Authorization', 'wrong-token');
 
@@ -112,10 +107,6 @@ describe('Login Validate', () => {
   })
 
   describe('If the token is valid', () => {
-    // beforeEach(() => {
-    //   sinon.stub(Jwt.prototype, "verify").resolves('Invalid token');
-    // });
-
     afterEach(sinon.restore);
 
     it('return status 200', async () => {

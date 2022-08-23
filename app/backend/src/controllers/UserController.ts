@@ -8,11 +8,11 @@ export default class UserController {
 
   login = controllerWrapper(async (req: Request, res: Response) => {
     const token = await this._persistanceService.login(req.body);
-    res.status(200).json({ token });
+    return res.status(200).json({ token });
   });
 
   getRole = controllerWrapper(async (req: Request, res: Response) => {
     const role = await this._persistanceService.getRole(req.body.user);
-    res.status(200).json({ role });
+    return res.status(200).json({ role });
   });
 }

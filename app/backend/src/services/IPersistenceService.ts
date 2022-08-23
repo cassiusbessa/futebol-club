@@ -1,11 +1,16 @@
 export interface IPersistanceService<T> {
-  login(entity: T): Promise<string>;
+  getAll(): Promise<T[] | []>;
   // update(entity: T): Promise<void>;
   // delete(id: number): Promise<void>;
-  // getAll(): Promise<T[]>;
-  // getById(id: number): Promise<T>;
+  getById(id: number): Promise<T | null>;
 }
 
-export interface IUserService<T> extends IPersistanceService<T> {
+export interface IUserService<T> {
+  login(entity: T): Promise<string>;
   getRole(user: T): Promise<string>;
+}
+
+export interface IMatcheService<T> {
+  getAll(): Promise<T[] | []>
+  create(entity: T): Promise<T>;
 }

@@ -14,7 +14,6 @@ export default class UserService implements IUserService<IUser> {
   public async login(login: ILogin): Promise<string> {
     this._userValidation.loginValidationField(login);
     const user = await this._userRepository.getByEmail(login.email);
-    // console.log(user);
     const payload = await this._userValidation.loginValidationUser(login, user);
     const tokenPayload: ITokenPayload = { id: payload.id,
       username: payload.username,

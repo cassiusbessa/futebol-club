@@ -1,5 +1,6 @@
 import { INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
+// import { ITeams } from './entitites/ITeams';
 
 class Teams extends Model {
   id!: number;
@@ -22,3 +23,5 @@ Teams.init({
   modelName: 'teams',
   timestamps: false,
 });
+
+export default Teams;

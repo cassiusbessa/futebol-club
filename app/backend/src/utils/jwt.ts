@@ -15,7 +15,6 @@ class Jwt implements ITokenService {
   }
 
   public generate(payload: ITokenPayload) {
-    console.log('>>>>>', payload);
     return sign(payload, SECRET, this._jwtConfig);
   }
 

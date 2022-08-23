@@ -1,5 +1,5 @@
 import UserFactory from './UserFactory';
+import TeamFactory from './TeamFactory';
+import MatcheFactory from './MatcheFactory';
 
-const teste = 0;
-
-export { UserFactory, teste };
+export { UserFactory, TeamFactory, MatcheFactory };

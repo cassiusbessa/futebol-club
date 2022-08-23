@@ -13,7 +13,6 @@ export default class TokenValidation {
     }
     try {
       const user = this._tokenService.verifyToken(authorization);
-      console.log('user', user);
       req.body.user = user as ITokenPayload;
       next();
     } catch (e) {

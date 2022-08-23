@@ -1,14 +1,13 @@
-// import Teams from '../teams';
-// // import { ILogin } from '../entitites/IUser';
+import { ITeams } from '../entitites/ITeams';
+import Teams from '../teams';
 
-// export default class UserRepository {
-//   private _user = User;
-//   public async getByEmail(email: string): Promise<User | null> {
-//     const user: User | null = await this._user.findOne({
-//       where: {
-//         email,
-//       },
-//     });
-//     return user;
-//   }
-// }
+export default class TeamRepository {
+  private _teams = Teams;
+  public async getAll(): Promise<ITeams[] | []> {
+    return this._teams.findAll();
+  }
+
+  public getById(id: number): Promise<ITeams | null> {
+    return this._teams.findByPk(id);
+  }
+}

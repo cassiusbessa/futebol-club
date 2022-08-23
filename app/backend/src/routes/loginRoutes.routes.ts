@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import UserServiceFactory from '../factories/UserFactory';
+import { UserFactory } from '../factories';
 import TokenValidation from '../middleware';
 import { Jwt } from '../utils';
 
-const userController = UserServiceFactory.create();
+const userController = UserFactory.create();
 const tokenValidationMid = new TokenValidation(new Jwt());
 
 const loginRouter = Router();

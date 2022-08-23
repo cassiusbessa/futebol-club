@@ -9,19 +9,29 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       home_team: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model:'teams',
+          key:'id'
+        }
       },
       home_team_goals: {
         type: Sequelize.INTEGER
       },
       away_team: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model:'teams',
+          key:'id'
+        }
       },
       away_team_goals: {
         type: Sequelize.INTEGER
       },
       in_progress: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BOOLEAN
       }
     });
     },
