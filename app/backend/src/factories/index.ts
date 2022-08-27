@@ -1,5 +1,7 @@
-import UserFactory from './UserFactory';
-import TeamFactory from './TeamFactory';
-import MatcheFactory from './MatcheFactory';
+import userController from './UserFactory';
+import teamController from './TeamFactory';
+import matcheController from './MatcheFactory';
+import leaderBoardController from './LeaderBoardFactory';
+import tokenMiddleware from './TokenValidationFactory';
 
-export { UserFactory, TeamFactory, MatcheFactory };
+export { userController, teamController, matcheController, tokenMiddleware, leaderBoardController };

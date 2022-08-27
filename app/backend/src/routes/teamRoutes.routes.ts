@@ -1,7 +1,5 @@
 import { Router } from 'express';
-import { TeamFactory } from '../factories';
-
-const teamController = TeamFactory.create();
+import { teamController } from '../factories';
 
 const teamRouter = Router();
 teamRouter.get('/', teamController.getAll);

@@ -3,7 +3,7 @@ import Teams from '../teams';
 
 export default class TeamRepository {
   private _teams = Teams;
-  public async getAll(): Promise<ITeams[] | []> {
+  public async getAll(): Promise<ITeams[]> {
     return this._teams.findAll();
   }
 

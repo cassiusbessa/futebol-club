@@ -9,6 +9,15 @@ export interface IMatches {
   inProgress: boolean;
 }
 
+export interface IEditMatch {
+  id?: number;
+  homeTeam?: number;
+  homeTeamGoals?: number;
+  awayTeam?: number;
+  awayTeamGoals?: number;
+  inProgress?: boolean;
+}
+
 export interface IShowMatches extends IMatches{
   teamHome: {
     teamName: string;

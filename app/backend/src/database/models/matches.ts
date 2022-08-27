@@ -21,6 +21,8 @@ Matches.init({
     type: INTEGER,
     allowNull: false,
     field: 'home_team',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
     references: { model: 'teams', key: 'id' },
   },
   homeTeamGoals: {
@@ -32,6 +34,8 @@ Matches.init({
     type: INTEGER,
     allowNull: false,
     field: 'away_team',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
     references: { model: 'teams', key: 'id' },
   },
   awayTeamGoals: {
@@ -48,6 +52,7 @@ Matches.init({
   sequelize: db,
   modelName: 'matches',
   timestamps: false,
+  tableName: 'matches',
 });
 
 Matches.belongsTo(Teams, {

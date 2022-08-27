@@ -17,7 +17,7 @@ export default class TokenValidation {
       next();
     } catch (e) {
       console.log(e);
-      const error = new ErrorHandler('Invalid or Expired token', httpStatusCodes.unauthorized);
+      const error = new ErrorHandler('Token must be a valid token', httpStatusCodes.unauthorized);
       return res.status(error.statusCode).json({ message: error.message });
     }
   };

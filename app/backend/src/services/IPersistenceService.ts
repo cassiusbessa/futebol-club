@@ -13,4 +13,6 @@ export interface IUserService<T> {
 export interface IMatcheService<T> {
   getAll(): Promise<T[] | []>
   create(entity: T): Promise<T>;
+  getById(id: number): Promise<T | null>;
+  update(id: number, modified: any): Promise<T>;
 }

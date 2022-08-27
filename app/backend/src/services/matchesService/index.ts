@@ -1,3 +1,4 @@
 import MatcheService from './MatcheService';
+import MatcheServiceValidation from './MatcheServiceValidation';
 
-export default MatcheService;
+export { MatcheService, MatcheServiceValidation };

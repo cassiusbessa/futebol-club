@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
+import { ITeams } from '../database/models/entitites/ITeams';
 import { controllerWrapper } from '../utils';
-import Team from '../database/models/teams';
 import { IPersistanceService } from '../services/IPersistenceService';
 
 export default class TeamsController {
-  constructor(private _persistanceService: IPersistanceService<Team>) {}
+  constructor(private _persistanceService: IPersistanceService<ITeams>) {}
 
   getAll = controllerWrapper(async (_req: Request, res: Response) => {
     const allTeams = await this._persistanceService.getAll();
