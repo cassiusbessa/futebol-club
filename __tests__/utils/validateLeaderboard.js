@@ -69,7 +69,6 @@ const validateLeaderboardBody = async (scoreBoardTableBodyMock, leaderboardTests
     const teamGoalsOwn = await page.$eval(body.goalsOwn(team.id), (el) => el.innerText);
     const teamGoalsBalance = await page.$eval(body.goalsBalance(team.id), (el) => el.innerText);
     const teamEfficiency = await page.$eval(body.efficiency(team.id), (el) => el.innerText);
-
     expect(teamId).toEqual(team.id);
     expect(teamName).toEqual(team.name);
     expect(teamPoints).toEqual(team.totalPoints);
